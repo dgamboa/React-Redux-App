@@ -3,8 +3,9 @@ import { connect } from "react-redux";
 
 import { getUser } from "../actions";
 
-const SearchForm = () => {
+const SearchForm = (props) => {
   const [username, setUsername] = useState("");
+  const { user, followers, isFetching, error, getUser } = props;
 
   const handleChange = (e) => {
     setUsername(e.target.value);
@@ -12,7 +13,15 @@ const SearchForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    getUser(username);
+    getUser();
+  }
+
+  if (error) {
+    return <h2>We got an error: {error}</h2>;
+  }
+
+  if (isFetching) {
+    return <h2>Loading new user...</h2>;
   }
 
   return (

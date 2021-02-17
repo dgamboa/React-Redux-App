@@ -10,11 +10,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 
 // Redux dependencies
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import { reducer } from "./reducers";
+import thunk from 'redux-thunk';
+import logger from "redux-logger";
 
-const store = createStore(reducer)
+const store = createStore(reducer, applyMiddleware(thunk.withExtraArgument(username), logger))
 
 ReactDOM.render(
   <Provider store={store}>
