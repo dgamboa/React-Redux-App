@@ -1,10 +1,9 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
-import { initialUser } from "../modules/UserData";
+import { connect } from "react-redux";
 
-export default function UserCard(props) {
-  // User to replace with API data
-  const user = initialUser;
+function UserCard(props) {
+  const user = props.user;
   
   const timeAgo = () => {
     const joinedDate = new Date(user.created_at);
@@ -28,8 +27,6 @@ export default function UserCard(props) {
     }
   }
 
-  console.log(user)
-
   return (
     <Card style={{ width: '18rem' }}>
       <Card.Img variant="top" src={user.avatar_url} />
@@ -48,3 +45,12 @@ export default function UserCard(props) {
     </Card>
   )
 }
+
+const mapStateToStore = state => {
+  return ({
+    user: state.user,
+    followers: state.followers
+  });
+};
+
+export default connect(mapStateToStore)(UserCard);
