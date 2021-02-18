@@ -11,14 +11,22 @@ const initialState = {
 export const reducer = (state = initialState, action) => {
   switch(action.type) {
     case(FETCH_USER_LOADING):
-      console.log("Loading")
-      return state;
+      return ({
+        ...state,
+        isFetching: true
+      })
     case(FETCH_USER_SUCCESS):
-      console.log("Success")
-      return state;
+      return ({
+        ...state,
+        isFetching: false,
+        user: action.payload
+      })
     case(FETCH_USER_FAIL):
-      console.log("Fail")
-      return state;
+      return ({
+        ...state,
+        isFetching: false,
+        error: "User " + action.payload
+      })
     default:
       return state;
   }

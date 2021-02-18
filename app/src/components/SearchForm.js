@@ -13,26 +13,25 @@ const SearchForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    getUser();
-  }
-
-  if (error) {
-    return <h2>We got an error: {error}</h2>;
+    getUser(username);
   }
 
   if (isFetching) {
-    return <h2>Loading new user...</h2>;
+    return <h2 className="loading-msg">Loading new user...</h2>;
   }
 
   return (
-    <form className="input-username" onSubmit={handleSubmit}>
-      <input
-        type="text"
-        name="username"
-        value={username}
-        onChange={handleChange}
-      />
-    </form>
+    <div>
+      { error && <h2 className="error">{error}, please try again</h2> }
+      <form className="input-username" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="username"
+          value={username}
+          onChange={handleChange}
+        />
+      </form>
+    </div>
   )
 }
 

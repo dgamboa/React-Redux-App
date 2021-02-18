@@ -31,3 +31,15 @@ input {
   border: 1px solid #d5d5d5;
   border-radius: 4px;
 }
+
+.error {
+  text-align: center;
+  color: red;
+  font-size: 20px;
+}
+
+.loading-msg {
+  text-align: center;
+  color: black;
+  font-size: 20px;
+}

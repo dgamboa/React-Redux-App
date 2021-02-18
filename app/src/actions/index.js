@@ -5,18 +5,19 @@ export const FETCH_USER_LOADING = "FETCH_USER_LOADING";
 export const FETCH_USER_SUCCESS = "FETCH_USER_SUCCESS";
 export const FETCH_USER_FAIL = "FETCH_USER_FAIL";
 
-export const getUser = () => dispatch => {
+export const getUser = username => dispatch => {
   dispatch( fetchUserLoading() )
 
-  axios.get(`https://api.github.com/users/dgamboa`, {
+  axios.get(`https://api.github.com/users/${username}`, {
     auth: AUTH
   })
     .then(res => {
       dispatch(fetchUserSuccess(res.data));
     })
     .catch(err => {
-      console.log(err);
-      // dispatch(fetchUserFail())
+      const errorMsg = err.response.data.message.toLowerCase();
+      console.log(errorMsg);
+      dispatch(fetchUserFail(errorMsg));
     })
 };
 
